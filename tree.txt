@@ -1,0 +1,82 @@
+#sum
+class Node:
+    def __init__(self):
+        self.left=None
+        self.right=None
+        self.data=None
+    def inorder_traversal(self,Node):
+        if Node:
+            self.inorder_traversal(Node.left)
+            print(Node.data)
+            self.inorder_traversal(Node.right)
+    def preorder_traversal(self,Node):
+        if Node:
+            print(Node.data,end=" ")
+            self.preorder_traversal(Node.left)
+            self.preorder_traversal(Node.right)
+    def postorder_traversal(self,Node):
+        if Node:
+            self.postorder_traversal(Node.left)
+            self.postorder_traversal(Node.right)
+            print(Node.data,end=" ")
+    def sum_of_nodes(self,Node):
+        if Node is None:
+            return 0
+        return Node.data+self.sum_of_nodes(Node.left)+self.sum_of_nodes(Node.right)
+    def count_nodes(self,Node):
+        if Node is None:
+            return 0
+        return 1 + self.count_nodes(Node.left) + self.count_nodes(Node.right)
+    def leaf_nodes(self,Node):
+        if Node is None:
+            return 0
+        return 1 + self.leaf_nodes(Node.left) + self.leaf_nodes(Node.right)
+    def height(self,Node):
+        if Node is None:
+            return 0
+        else:
+            return max(self.height(Node.left),self.height(Node.right)+1)
+
+tree=Node()
+tree.data=1
+tree.left=Node()
+tree.left.data=2
+tree.left.right=Node()
+tree.left.right.data=5
+tree.left.left=Node()
+tree.left.left.data=4
+tree.right=Node()
+tree.right.data=3
+tree.right.left=Node()
+tree.right.left.data=6
+tree.right.right=Node()
+tree.right.right.data=7
+print("inorder traversal of bimnary tree is:")
+tree.inorder_traversal(Node=tree)
+print("\n preorder traversal of binary tree is:")
+tree.preorder_traversal(Node=tree)
+tree.postorder_traversal(Node=tree)
+print("\n postorder traversal of binary tree is:")
+print(tree.data)
+print(tree.left.data)
+print(tree.right.data)
+print("\n sum of all nodes in binary tree is:")
+print(tree.sum_of_nodes(Node=tree))
+print("\n sum of all nodes in left subtree is:")
+print(tree.sum_of_nodes(Node=tree.left))
+print("\n sum_of_nodes in right subtree is:")
+print(tree.sum_of_nodes(Node=tree.right))
+print("\nTotal number of nodes in the tree is:")
+print(tree.count_nodes(Node=tree))
+print("\n total no of nodein right tree is:")
+print(tree.count_nodes(Node=tree.right))
+print("\n total no of nodein left tree is:")
+print(tree.count_nodes(Node=tree.left))
+print("\n total no of leaf nodes right in a tree is:")
+print(tree.leaf_nodes(Node=tree.left))
+print("\n total no of leaf nodes leaf in a tree is:")
+print(tree.leaf_nodes(Node=tree.right))
+print("\n maximum height of a right subtree is:")
+print(tree.height(Node=tree.right))
+print("\n maximum height of a left subtree is:")
+print(tree.height(Node=tree.left))

@@ -1,0 +1,72 @@
+class Node:
+    def __init__(self, data):
+        self.left = None
+        self.right = None
+        self.data = data
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data, root):
+        if root is None:
+            return Node(data)
+        if data < root.data:
+            root.left = self.insert(data, root.left)
+        elif data > root.data:
+            root.right = self.insert(data, root.right)
+        return root
+
+    def inorder_traversal(self, root):
+        if root:
+            self.inorder_traversal(root.left)
+            print(root.data, end=" ")
+            self.inorder_traversal(root.right)
+
+    def preorder_traversal(self, root):
+        if root:
+            print(root.data, end=" ")
+            self.preorder_traversal(root.left)
+            self.preorder_traversal(root.right)
+
+    def postorder_traversal(self, root):
+        if root:
+            self.postorder_traversal(root.left)
+            self.postorder_traversal(root.right)
+            print(root.data, end=" ")  # Removed duplicate print
+
+    def search_in_BST(self, root, key):
+        if root is None:
+            return False
+        if root.data == key:
+            return True
+        if key < root.data:
+            return self.search_in_BST(root.left, key)
+        else:
+            return self.search_in_BST(root.right, key)
+    
+    def height(self, root):
+        if root is None:
+            return -1 
+        return 1 + max(self.height(root.left), self.height(root.right))        
+
+BST_tree = BST()
+root = None
+root = BST_tree.insert(20, root)
+root = BST_tree.insert(30, root)
+root = BST_tree.insert(100, root)
+
+print("\nInorder Traversal:")
+BST_tree.inorder_traversal(root)
+
+print("\nPreorder Traversal:")
+BST_tree.preorder_traversal(root)
+
+print("\nPostorder Traversal:")
+BST_tree.postorder_traversal(root)
+
+print("\n\nSearch for 30:", BST_tree.search_in_BST(root, 30)) 
+print("Search for 50:", BST_tree.search_in_BST(root, 50))      
+
+print("Height of tree:")
+print(BST_tree.height(root)) 
